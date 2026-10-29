@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
 
-const enquirySchema = z.object({
+export const enquirySchema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(100),
   phone: z
     .string()

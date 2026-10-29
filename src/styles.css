@@ -181,3 +181,32 @@
     transparent
   );
 }
+
+/* Cinematic section backdrop: deep navy with soft ocean light fields */
+@utility ink-scene-bg {
+  background:
+    radial-gradient(60% 55% at 72% 38%, color-mix(in oklab, var(--color-ink-2) 60%, transparent), transparent 72%),
+    radial-gradient(50% 45% at 25% 80%, color-mix(in oklab, var(--color-primary) 16%, transparent), transparent 70%),
+    var(--color-ink);
+}
+
+/* Vignette overlay that keeps hero text readable over the 3D scene */
+@utility ink-vignette {
+  background:
+    linear-gradient(90deg, color-mix(in oklab, var(--color-ink) 88%, transparent) 0%, transparent 55%),
+    linear-gradient(0deg, var(--color-ink) 0%, transparent 22%),
+    radial-gradient(120% 100% at 50% 50%, transparent 55%, color-mix(in oklab, var(--color-ink) 80%, transparent) 100%);
+}
+
+/* Vertical light trail used by the learning journey */
+@utility light-trail-v {
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in oklab, var(--color-primary) 55%, transparent),
+    color-mix(in oklab, var(--color-gold) 45%, transparent),
+    transparent
+  );
+}
+
