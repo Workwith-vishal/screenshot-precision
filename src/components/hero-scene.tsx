@@ -44,7 +44,8 @@ function Particles({ count = 200, reduced }: { count?: number; reduced: boolean 
 
   useFrame((_, delta) => {
     if (reduced || !ref.current) return;
-    const attr = ref.current.geometry.attributes.position as THREE.BufferAttribute;
+    const attr = ref.current.geometry.attributes['position'] as THREE.BufferAttribute;
+
     const dt = clampDelta(delta);
     for (let i = 0; i < count; i++) {
       let y = attr.getY(i) + dt * (0.05 + ((i % 6) / 6) * 0.09);
@@ -91,14 +92,18 @@ function Constellation({ reduced }: { reduced: boolean }) {
     const linePts: number[] = [];
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
-        if (nodes[i].distanceTo(nodes[j]) < 3) {
+        const a = nodes[i];
+        const b = nodes[j];
+        if (!a || !b) continue;
+        if (a.distanceTo(b) < 3) {
           linePts.push(
-            nodes[i].x, nodes[i].y, nodes[i].z,
-            nodes[j].x, nodes[j].y, nodes[j].z,
+            a.x, a.y, a.z,
+            b.x, b.y, b.z,
           );
         }
       }
     }
+
     return {
       linePositions: new Float32Array(linePts),
       nodePositions: new Float32Array(nodes.flatMap((n) => [n.x, n.y, n.z])),

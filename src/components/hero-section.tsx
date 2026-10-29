@@ -10,14 +10,15 @@ class SceneBoundary extends Component<
   { children: ReactNode; fallback: ReactNode },
   { failed: boolean }
 > {
-  state = { failed: false };
-  static getDerivedStateFromError() {
+  override state = { failed: false };
+  static override getDerivedStateFromError() {
     return { failed: true };
   }
-  componentDidCatch(error: unknown) {
+  override componentDidCatch(error: unknown) {
     console.warn("3D hero scene unavailable, showing static fallback:", error);
   }
-  render() {
+  override render() {
+
     return this.state.failed ? this.props.fallback : this.props.children;
   }
 }
